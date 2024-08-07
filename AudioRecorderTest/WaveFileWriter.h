@@ -1,24 +1,16 @@
-#ifndef WAVEFILEWRITER_H
-#define WAVEFILEWRITER_H
-
+#pragma once
 #include <fstream>
 #include <string>
-#include <windows.h>
-#include <mmreg.h>
+#include <cstdint> // Include for uint8_t
 
 class WaveFileWriter {
 public:
-    WaveFileWriter(const std::string& filename, WAVEFORMATEX* format);
+    WaveFileWriter(const std::string& filename);
     ~WaveFileWriter();
-
-    void writeData(const BYTE* data, size_t size);
+    void writeData(const uint8_t* data, size_t size);
     void finalize();
 
 private:
     std::ofstream file;
-    WAVEFORMATEX* format;
     size_t dataChunkSize;
-    size_t fileSize;
 };
-
-#endif // WAVEFILEWRITER_H
